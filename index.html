@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SteamyBite — Delicious Cuisine</title>
+  <meta name="description" content="SteamyBite menghadirkan masakan elegan, plating premium, dan layanan kuliner modern. Dine-in, catering, hingga private dining.">
+  <meta name="theme-color" content="#F39C12">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -17,6 +19,10 @@
       --radius: 14px;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Poppins, sans-serif;
@@ -24,9 +30,8 @@
       background: #fff;
     }
 
-    img { max-width: 100%; height: auto; }
+    img { max-width: 100%; height: auto; display: block; }
 
-    /* Layout */
     .container { max-width: 1150px; margin: auto; padding: 0 20px; }
 
     /* NAVBAR */
@@ -63,7 +68,6 @@
       background: rgba(243,156,18,0.15);
     }
 
-    /* Hamburger */
     .hamburger {
       display: none;
       font-size: 26px;
@@ -135,7 +139,6 @@
       color: var(--accent);
     }
 
-    /* GENERIC SECTION */
     section { padding: 80px 0; }
 
     .section-title {
@@ -163,7 +166,7 @@
       padding: 22px;
       border-radius: 14px;
       text-align: center;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
     }
 
     /* PORTFOLIO */
@@ -173,7 +176,11 @@
       gap: 20px;
     }
 
-    .portfolio-item { position: relative; border-radius: 12px; overflow:hidden; }
+    .portfolio-item { 
+      position: relative; 
+      border-radius: 12px; 
+      overflow: hidden; 
+    }
 
     .portfolio-caption {
       position: absolute;
@@ -198,7 +205,7 @@
       padding: 20px;
       text-align: center;
       border-radius: 14px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
     }
 
     .avatar {
@@ -206,6 +213,7 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
+      margin: auto;
       margin-bottom: 10px;
     }
 
@@ -225,7 +233,6 @@
       font-size: 15px;
     }
 
-    /* FOOTER */
     footer {
       background: #f5f5f5;
       padding: 25px 0;
@@ -234,7 +241,6 @@
       font-size: 14px;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav ul { display: none; }
       .hamburger { display: block; }
@@ -259,7 +265,7 @@
 <div class="nav">
   <div class="container nav-inner">
     <div class="brand" style="display:flex;align-items:center;gap:12px">
-      <img src="img/logo.png" alt="logo" style="height:40px" />
+      <img src="img/logo.png" alt="Logo SteamyBite" style="height:40px" />
       <strong>SteamyBite</strong>
     </div>
 
@@ -279,12 +285,12 @@
 
   <div class="container">
     <div id="menu-mobile" class="mobile-menu">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#team">Team</a>
-      <a href="#contact">Contact</a>
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+      <a href="#team" onclick="closeMenu()">Team</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
     </div>
   </div>
 </div>
@@ -303,7 +309,7 @@
     </div>
 
     <div>
-      <img src="img/hero-food.jpg" alt="hero">
+      <img src="img/hero-food.jpg" alt="Hidangan SteamyBite">
     </div>
   </div>
 </header>
@@ -323,7 +329,7 @@
       </div>
 
       <div>
-        <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.05)">
+        <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.05)">
           <h4>Vision & Mission</h4>
           <p><strong>Vision:</strong> Menjadi rujukan kuliner elegan yang menggabungkan cita rasa lokal & internasional.</p>
           <p><strong>Mission:</strong> Memberikan pengalaman bersantap yang berkesan dan berkualitas tinggi.</p>
@@ -369,17 +375,17 @@
 
     <div class="portfolio-grid">
       <div class="portfolio-item">
-        <img src="img/plate1.jpg" />
+        <img src="img/plate1.jpg" alt="Signature Bowl">
         <div class="portfolio-caption">Signature Bowl</div>
       </div>
 
       <div class="portfolio-item">
-        <img src="img/plate2.jpg" />
+        <img src="img/plate2.jpg" alt="Seared Delight">
         <div class="portfolio-caption">Seared Delight</div>
       </div>
 
       <div class="portfolio-item">
-        <img src="img/plate3.jpg" />
+        <img src="img/plate3.jpg" alt="Velvet Dessert">
         <div class="portfolio-caption">Velvet Dessert</div>
       </div>
     </div>
@@ -394,25 +400,25 @@
 
     <div class="team-grid">
       <div class="member">
-        <img class="avatar" src="img/chef1.jpg" />
+        <img class="avatar" src="img/chef1.jpg" alt="Chef Gina">
         <h4>Gina</h4>
         Head Chef
       </div>
 
       <div class="member">
-        <img class="avatar" src="img/chef2.jpg" />
+        <img class="avatar" src="img/chef2.jpg" alt="Chef Ipda">
         <h4>Ipda</h4>
         Pastry Chef
       </div>
 
       <div class="member">
-        <img class="avatar" src="img/chef2.jpg" />
+        <img class="avatar" src="img/chef4.jpg" alt="Chef Wike">
         <h4>Wike</h4>
         Pastry Chef
       </div>
 
       <div class="member">
-        <img class="avatar" src="img/chef3.jpg" />
+        <img class="avatar" src="img/chef3.jpg" alt="Manager Nurfauzy">
         <h4>Nurfauzy</h4>
         Manager
       </div>
@@ -431,7 +437,7 @@
       <!-- WhatsApp -->
       <div style="display:flex;align-items:center;justify-content:center">
         <a
-          href="https://wa.me/6282119730602?text=Halo%20SteamyBite,%20saya%20ingin%20bertanya."
+          href="https://wa.me/6282119730602?text=Halo%20SteamyBite%2C%20saya%20ingin%20bertanya."
           class="btn btn-primary"
           style="font-size:18px;padding:14px 26px"
           target="_blank"
@@ -442,11 +448,11 @@
 
       <!-- Info Box -->
       <div>
-        <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.05)">
+        <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.05)">
           <h4>Visit Us</h4>
           <p style="color:var(--muted)">Jl. Tanuwijaya No.4, Tasikmalaya</p>
           <p style="color:var(--muted)">10:00 - 22:00</p>
-          <p style="color:var(--muted)">+62 821 1973 0602</p>
+          <a href="tel:+6282119730602" style="color:var(--muted)">+62 821 1973 0602</a>
 
           <a class="btn btn-outline" href="mailto:atriarahmansyahipda@gmail.com" style="margin-top:10px;display:inline-block">
             Email Us
@@ -464,8 +470,12 @@
 
 <script>
   function toggleMenu() {
-    const menu = document.getElementById("menu-mobile");
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    const m = document.getElementById("menu-mobile");
+    m.style.display = m.style.display === "flex" ? "none" : "flex";
+  }
+
+  function closeMenu() {
+    document.getElementById("menu-mobile").style.display = "none";
   }
 </script>
 

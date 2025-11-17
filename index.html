@@ -1,324 +1,450 @@
-<!--
-SteamyBite — Company Profile (Single-file)
-Instructions:
-1. Save this content to a file named `index.html`.
-2. Create a folder `img/` next to index.html and place your logo file as `img/logo.png` (or replace the src in the <img> tag).
-   - If you already have the generated logo from this chat, rename it to `logo.png` and put it in img/.
-3. Open `index.html` in a browser to preview. No server required.
-
-Features included:
-- Elegant, luxurious design (white base + warm golden-orange accents)
-- Fully responsive (desktop / tablet / mobile)
-- Smooth CSS animations and subtle JS scroll reveal
-- Sections: Home (hero), About, Vision & Mission, Services, Portfolio, Team, Contact
-- Contact form uses `mailto:` fallback (no backend) — adjust as needed
-- Comments in code explain where to customize
-
-You can copy this file directly and edit texts, images, colors, and links.
--->
-
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SteamyBite — Delicious Cuisine</title>
-  <meta name="description" content="SteamyBite — Elegan, lezat, dan hangat. Company profile restoran kuliner modern.">
 
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Basic styling -->
   <style>
-    :root{
-      --accent: #F39C12; /* golden-orange */
-      --accent-2: #FF6B6B; /* bright complementary */
+    :root {
+      --accent: #F39C12;
+      --accent-2: #FF6B6B;
       --muted: #777;
       --dark: #111;
       --radius: 14px;
-      --glass: rgba(255,255,255,0.75);
-    }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      color:var(--dark);
-      background: #fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Container */
-    .container{max-width:1150px;margin:0 auto;padding:0 20px;}
+    body {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      color: var(--dark);
+      background: #fff;
+    }
+
+    img { max-width: 100%; height: auto; }
+
+    /* Layout */
+    .container { max-width: 1150px; margin: auto; padding: 0 20px; }
 
     /* NAVBAR */
-    .nav{position:fixed;top:18px;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:center}
-    .nav-inner{background: rgba(255,255,255,0.85);backdrop-filter: blur(6px);border-radius:40px;padding:8px 18px;box-shadow:0 6px 20px rgba(20,20,20,0.06);}
-    .brand{display:flex;gap:12px;align-items:center}
-    .brand img{height:44px;width:auto}
-    .brand h1{font-family:'Playfair Display',serif;margin:0;font-size:20px;letter-spacing:1px;color:var(--dark)}
-    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:14px;align-items:center}
-    nav a{color:var(--dark);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
-    nav a:hover{background:linear-gradient(90deg, rgba(243,156,18,0.12), rgba(255,107,107,0.06));}
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 10px 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+      z-index: 900;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      padding: 10px 14px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      border-radius: 10px;
+    }
+
+    nav a:hover {
+      background: rgba(243,156,18,0.15);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.05);
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: white;
+      padding: 16px;
+      margin-top: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid #eee;
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
 
     /* HERO */
-    .hero{height:90vh;min-height:560px;display:flex;align-items:center}
-    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
-    .hero-left h2{font-family:'Playfair Display',serif;font-size:48px;margin:0 0 12px;line-height:1.05}
-    .hero-left p.lead{color:var(--muted);font-size:18px;margin:0 0 20px}
-    .btn{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:600}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 10px 30px rgba(243,156,18,0.14)}
-    .btn-outline{border:2px solid var(--accent);color:var(--accent);background:transparent}
+    .hero {
+      padding-top: 120px;
+      padding-bottom: 40px;
+    }
 
-    .card-hero{background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.65));border-radius:18px;padding:20px;box-shadow:0 12px 40px rgba(16,16,16,0.08)}
-    .dish{width:100%;height:100%;object-fit:cover;border-radius:12px}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
 
-    /* SECTIONS */
-    section{padding:80px 0}
-    h3.section-title{font-family:'Playfair Display';font-size:32px;margin:0 0 12px}
-    p.section-sub{color:var(--muted);margin:0 0 28px}
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      line-height: 1.1;
+      margin: 0 0 16px;
+    }
+
+    .lead { color: var(--muted); font-size: 18px; }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 20px;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: white;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    /* GENERIC SECTION */
+    section { padding: 80px 0; }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
 
     /* SERVICES */
-    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .service{background:#fff;border-radius:14px;padding:24px;text-align:center;box-shadow:0 8px 30px rgba(16,16,16,0.04)}
-    .service h4{margin:14px 0 6px}
-    .service p{color:var(--muted);font-size:15px}
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .service {
+      background: #fff;
+      padding: 22px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    }
 
     /* PORTFOLIO */
-    .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .portfolio-item{border-radius:12px;overflow:hidden;position:relative}
-    .portfolio-item img{width:100%;display:block}
-    .portfolio-caption{position:absolute;left:10px;bottom:10px;background:linear-gradient(90deg,rgba(0,0,0,0.55),rgba(0,0,0,0.2));color:#fff;padding:8px 12px;border-radius:10px}
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-item { position: relative; border-radius: 12px; overflow:hidden; }
+
+    .portfolio-caption {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      background: rgba(0,0,0,0.55);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
 
     /* TEAM */
-    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .member{background:linear-gradient(180deg,#fff, #fff);padding:18px;border-radius:14px;text-align:center}
-    .avatar{width:120px;height:120px;border-radius:999px;object-fit:cover;margin:0 auto}
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .member {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
 
     /* CONTACT */
-    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:start}
-    form .field{margin-bottom:12px}
-    input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #eee;font-size:15px}
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #eee;
+      font-size: 15px;
+    }
 
     /* FOOTER */
-    footer{background:#f8f8f8;padding:28px 0;border-top:1px solid #eee}
-    footer p{margin:0;color:var(--muted)}
+    footer {
+      background: #f5f5f5;
+      padding: 25px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
     /* RESPONSIVE */
-    @media (max-width:980px){
-      .hero-grid{grid-template-columns:1fr 320px}
-      .services-grid,.portfolio-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
-      .nav-inner{padding:8px 12px}
-    }
-    @media (max-width:720px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero{min-height:640px;padding-top:60px}
-      .contact-grid{grid-template-columns:1fr}
-      .services-grid,.portfolio-grid,.team-grid{grid-template-columns:1fr}
-      nav ul{display:none}
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .hamburger { display: block; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
     }
 
-    /* subtle animations */
-    .reveal{opacity:0;transform:translateY(12px);transition:all 550ms cubic-bezier(.2,.9,.3,1)}
-    .reveal.visible{opacity:1;transform:none}
-    .fade{transition:opacity 600ms ease-in-out;opacity:0}
-    .fade.in{opacity:1}
+    @media (max-width: 700px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      h2 { font-size: 36px; }
+    }
 
+    @media (max-width: 480px) {
+      h2 { font-size: 30px; }
+      .btn { width: 100%; text-align: center; }
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <div class="nav">
-    <div class="nav-inner container">
-      <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
-        <div class="brand">
-          <img src="img/logo.png" alt="SteamyBite logo" onerror="this.style.display='none'">
-          <div>
-            <h1>SteamyBite</h1>
-            <div style="font-size:11px;color:var(--muted);margin-top:2px">Delicious Cuisine</div>
-          </div>
+<!-- NAV -->
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="brand" style="display:flex;align-items:center;gap:12px">
+      <img src="img/logo.png" alt="logo" style="height:40px" />
+      <strong>SteamyBite</strong>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <nav>
+      <ul id="menu-desktop">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div id="menu-mobile" class="mobile-menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header id="home" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h2>SteamyBite — Where Every Bite Feels Like Home</h2>
+      <p class="lead">Menghadirkan masakan berkualitas dengan sentuhan elegan dan bahan segar setiap hari.</p>
+
+      <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#services">Explore Menu</a>
+        <a class="btn btn-outline" href="#contact">Book Table</a>
+      </div>
+    </div>
+
+    <div>
+      <img src="img/hero-food.jpg" alt="hero">
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h3 class="section-title">About SteamyBite</h3>
+    <p class="section-sub">Tempat di mana rasa, aroma, dan estetika menyatu.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
+      <div>
+        <p style="color:var(--muted);line-height:1.8">
+          SteamyBite fokus pada bahan segar, teknik memasak modern, dan plating elegan.
+          Kami menyediakan dine-in, catering, hingga private dining.
+        </p>
+      </div>
+
+      <div>
+        <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.05)">
+          <h4>Vision & Mission</h4>
+          <p><strong>Vision:</strong> Menjadi rujukan kuliner elegan yang menggabungkan cita rasa lokal & internasional.</p>
+          <p><strong>Mission:</strong> Memberikan pengalaman bersantap yang berkesan dan berkualitas tinggi.</p>
         </div>
-        <nav>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- HERO -->
-  <header id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-left">
-        <div style="margin-top:20px" class="reveal">
-          <h2>SteamyBite — Where Every Bite Feels Like Home</h2>
-          <p class="lead">Menghadirkan masakan berkualitas dengan sentuhan elegan — dari pilihan bahan segar hingga plating menawan.</p>
-          <div style="display:flex;gap:12px;margin-top:18px">
-            <a class="btn btn-primary" href="#services">Explore Menu</a>
-            <a class="btn btn-outline" href="#contact">Book Table</a>
-          </div>
-        </div>
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <h3 class="section-title">Our Services</h3>
+    <p class="section-sub">Layanan yang kami tawarkan.</p>
 
-        <div style="margin-top:36px;max-width:680px" class="reveal" id="hero-feat">
-          <div class="card-hero">
-            <div style="display:flex;gap:16px;align-items:center">
-              <img src="img/dish.jpg" alt="featured dish" class="dish" onerror="this.style.display='none'">
-              <div>
-                <div style="font-weight:700">Signature Steamy Bowl</div>
-                <div style="color:var(--muted);font-size:14px;margin-top:6px">A rich, savory broth with hand-picked toppings — handcrafted daily.</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="services-grid">
+      <div class="service">
+        <div style="font-size:32px">🍲</div>
+        <h4>Dine-In Experience</h4>
+        Suasana elegan & menu curated.
       </div>
 
-      <div class="reveal" style="display:flex;align-items:center;justify-content:center">
-        <div style="width:100%">
-          <img src="img/hero-food.jpg" alt="hero food" class="dish" onerror="this.style.display='none'">
-        </div>
+      <div class="service">
+        <div style="font-size:32px">🥡</div>
+        <h4>Premium Takeaway</h4>
+        Makanan tetap hangat & rapi sampai tujuan.
+      </div>
+
+      <div class="service">
+        <div style="font-size:32px">🎉</div>
+        <h4>Catering & Events</h4>
+        Cocok untuk acara keluarga & korporat.
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div style="text-align:center">
-        <h3 class="section-title">About SteamyBite</h3>
-        <p class="section-sub">SteamyBite adalah tempat di mana kegembiraan kuliner bertemu estetika plating yang elegan. Kami percaya makanan adalah pengalaman—dari rasa hingga tampilan.</p>
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <h3 class="section-title">Portfolio</h3>
+    <p class="section-sub">Plating cantik & cita rasa juara.</p>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="img/plate1.jpg" />
+        <div class="portfolio-caption">Signature Bowl</div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:28px;align-items:center">
-        <div class="reveal">
-          <p style="color:var(--muted);line-height:1.8">Didirikan oleh tim pecinta kuliner, SteamyBite fokus pada bahan berkualitas tinggi dan teknik memasak klasik yang dipadukan dengan sentuhan modern. Layanan kami mencakup dine-in, catering kecil, dan private dining untuk acara spesial.</p>
-          <ul style="color:var(--muted);margin-top:12px">
-            <li>Bahan lokal segar setiap hari</li>
-            <li>Chef berpengalaman</li>
-            <li>Presentasi mewah & pengalaman bersantap hangat</li>
-          </ul>
-        </div>
-        <div class="reveal">
-          <div style="background:linear-gradient(180deg,#fff,#fff);padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(16,16,16,0.04)">
-            <h4 style="margin:0 0 8px">Vision & Mission</h4>
-            <p style="color:var(--muted);margin:0 0 6px"><strong>Vision:</strong> Menjadi rujukan kuliner elegan yang menggabungkan cita rasa lokal dan teknik internasional.</p>
-            <p style="color:var(--muted);margin:0"><strong>Mission:</strong> Memberi pengalaman bersantap berkualitas, ramah, dan berkesan bagi setiap tamu.</p>
-          </div>
-        </div>
+      <div class="portfolio-item">
+        <img src="img/plate2.jpg" />
+        <div class="portfolio-caption">Seared Delight</div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="img/plate3.jpg" />
+        <div class="portfolio-caption">Velvet Dessert</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SERVICES -->
-  <section id="services" style="background:#fff">
-    <div class="container">
-      <div style="text-align:center">
-        <h3 class="section-title">Our Services</h3>
-        <p class="section-sub">Layanan yang kami tawarkan untuk memenuhi kebutuhan kulinermu.</p>
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <h3 class="section-title">Meet The Team</h3>
+    <p class="section-sub">Tim di balik setiap sajian.</p>
+
+    <div class="team-grid">
+      <div class="member">
+        <img class="avatar" src="img/chef1.jpg" />
+        <h4>Chef Andra</h4>
+        Head Chef
       </div>
 
-      <div class="services-grid">
-        <div class="service reveal">
-          <div style="font-size:28px">🍲</div>
-          <h4>Dine-In Experience</h4>
-          <p>Suasana elegan, layanan sopan, dan menu curated setiap musim.</p>
-        </div>
-        <div class="service reveal">
-          <div style="font-size:28px">🥡</div>
-          <h4>Premium Takeaway</h4>
-          <p>Packaging rapi agar makanan sampai tetap hangat dan presentable.</p>
-        </div>
-        <div class="service reveal">
-          <div style="font-size:28px">🎉</div>
-          <h4>Catering & Private Events</h4>
-          <p>Menu tailor-made untuk acara korporat, intimate dining, dan perayaan.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO / GALLERY -->
-  <section id="portfolio">
-    <div class="container">
-      <div style="text-align:center">
-        <h3 class="section-title">Portfolio</h3>
-        <p class="section-sub">Beberapa hasil kreasi kami — plating yang Instagrammable dan cita rasa yang mendalam.</p>
+      <div class="member">
+        <img class="avatar" src="img/chef2.jpg" />
+        <h4>Chef Mira</h4>
+        Pastry Chef
       </div>
 
-      <div class="portfolio-grid">
-        <div class="portfolio-item reveal"><img src="img/plate1.jpg" alt="plate1"><div class="portfolio-caption">Signature Steamy Bowl</div></div>
-        <div class="portfolio-item reveal"><img src="img/plate2.jpg" alt="plate2"><div class="portfolio-caption">Seared Delight</div></div>
-        <div class="portfolio-item reveal"><img src="img/plate3.jpg" alt="plate3"><div class="portfolio-caption">Dessert – Velvet</div></div>
+      <div class="member">
+        <img class="avatar" src="img/chef3.jpg" />
+        <h4>Rian</h4>
+        Manager
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TEAM -->
-  <section id="team" style="background:#fff">
-    <div class="container">
-      <div style="text-align:center">
-        <h3 class="section-title">Meet The Team</h3>
-        <p class="section-sub">Chef dan tim di balik setiap sajian.</p>
-      </div>
-      <div class="team-grid">
-        <div class="member reveal">
-          <img class="avatar" src="img/chef1.jpg" alt="chef1" onerror="this.style.display='none'">
-          <h4 style="margin-top:12px">Chef Andra</h4>
-          <div style="color:var(--muted)">Head Chef</div>
-        </div>
-        <div class="member reveal">
-          <img class="avatar" src="img/chef2.jpg" alt="chef2" onerror="this.style.display='none'">
-          <h4 style="margin-top:12px">Chef Mira</h4>
-          <div style="color:var(--muted)">Pastry Chef</div>
-        </div>
-        <div class="member reveal">
-          <img class="avatar" src="img/chef3.jpg" alt="chef3" onerror="this.style.display='none'">
-          <h4 style="margin-top:12px">Rian</h4>
-          <div style="color:var(--muted)">Manager</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
- <!-- CONTACT -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <div style="text-align:center">
-      <h3 class="section-title">Contact Us</h3>
-      <p class="section-sub">Hubungi kami langsung via WhatsApp untuk reservasi, catering, atau kolaborasi.</p>
-    </div>
+    <h3 class="section-title">Contact Us</h3>
+    <p class="section-sub">Hubungi kami untuk reservasi & layanan.</p>
 
     <div class="contact-grid">
-      
-      <!-- WhatsApp Button Only -->
+
+      <!-- WhatsApp -->
       <div style="display:flex;align-items:center;justify-content:center">
-        <a 
-          href="https://wa.me/6282119730602?text=Halo%20SteamyBite,%20saya%20ingin%20bertanya%20tentang%20reservasi."
+        <a
+          href="https://wa.me/6282119730602?text=Halo%20SteamyBite,%20saya%20ingin%20bertanya."
           class="btn btn-primary"
-          style="font-size:18px;padding:14px 26px;border-radius:14px;text-align:center"
+          style="font-size:18px;padding:14px 26px"
           target="_blank"
         >
           Chat via WhatsApp
         </a>
       </div>
 
-      <!-- Right Info Card -->
+      <!-- Info Box -->
       <div>
-        <div style="background:linear-gradient(180deg,#fff,#fff);padding:18px;border-radius:12px;box-shadow:0 12px 30px rgba(16,16,16,0.04)">
-          <h4 style="margin-top:0">Visit Us</h4>
-          <p style="color:var(--muted);margin:6px 0">Jl. Tanuwijaya No.4, Empangsari, Kec. Tawang, Kab. Tasikmalaya, Jawa Barat 46113</p>
-          <p style="color:var(--muted);margin:6px 0">Mon - Sun: 10:00 - 22:00</p>
-          <p style="color:var(--muted);margin:6px 0">Phone: +62 821 1973 0602</p>
+        <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.05)">
+          <h4>Visit Us</h4>
+          <p style="color:var(--muted)">Jl. Tanuwijaya No.4, Tasikmalaya</p>
+          <p style="color:var(--muted)">10:00 - 22:00</p>
+          <p style="color:var(--muted)">+62 821 1973 0602</p>
 
-          <div style="margin-top:10px">
-            <a class="btn btn-outline" href="mailto:atriarahmansyahipda@gmail.com">Email Us</a>
-          </div>
+          <a class="btn btn-outline" href="mailto:atriarahmansyahipda@gmail.com" style="margin-top:10px;display:inline-block">
+            Email Us
+          </a>
         </div>
       </div>
 
@@ -326,59 +452,16 @@ You can copy this file directly and edit texts, images, colors, and links.
   </div>
 </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>
-        <strong>SteamyBite</strong>
-        <div style="color:var(--muted);font-size:13px">© 2025 SteamyBite. All rights reserved.</div>
-      </div>
-      <div style="color:var(--muted);font-size:14px">Follow us: Instagram · Facebook · TikTok</div>
-    </div>
-  </footer>
+<footer>
+  © 2025 SteamyBite — All rights reserved.
+</footer>
 
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("menu-mobile");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  }
+</script>
 
-  <!-- Minimal JS for reveal animations & contact form -->
-  <script>
-    // scroll reveal simple
-    function revealAll(){
-      const els = document.querySelectorAll('.reveal');
-      const offset = window.innerHeight * 0.85;
-      els.forEach(el => {
-        const r = el.getBoundingClientRect();
-        if(r.top < offset){ el.classList.add('visible'); }
-      });
-    }
-    window.addEventListener('scroll', revealAll);
-    window.addEventListener('load', ()=>{ revealAll(); document.querySelectorAll('.fade').forEach(e => e.classList.add('in')) });
-
-    // contact form fallback: opens mail client and shows toast
-    function submitForm(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const subject = document.getElementById('subject').value.trim() || 'Contact from website';
-      const message = encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+document.getElementById('message').value.trim());
-      const mailto = `mailto:hello@steamybite.com?subject=${encodeURIComponent(subject)}&body=${message}`;
-      // Try to open mail client
-      window.location.href = mailto;
-      // show temporary confirmation
-      const btn = document.querySelector('button[type=submit]');
-      const orig = btn.innerText;
-      btn.innerText = 'Opening Email...';
-      btn.disabled = true;
-      setTimeout(()=>{btn.innerText = orig;btn.disabled=false},2000);
-    }
-
-    // Smooth anchor scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        const id = a.getAttribute('href');
-        const el = document.querySelector(id);
-        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-      })
-    });
-  </script>
 </body>
 </html>
